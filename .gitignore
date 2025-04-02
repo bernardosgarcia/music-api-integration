@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# TypeScript
+/dist/
+/*.tsbuildinfo
+
+# Logs
+*.log
+
+# .env file
+.env
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# npm package lock
+package-lock.json
+
+# Optional IDE configurations
+.vscode/
+.idea/
