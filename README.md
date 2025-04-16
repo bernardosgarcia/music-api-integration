@@ -36,56 +36,44 @@ Before running the application, make sure you have the following dependencies in
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/music-api-integration.git
-   
 2. Install dependencies:
 
-bash
-Copiar
-cd music-api-integration
-npm install
-# or
-yarn install
-Configure Spotify and Music.AI API credentials:
+   ```bash
+   cd music-api-integration
+   npm install
+   # or
+   yarn install
+3. Configure Spotify and Music.AI API credentials:
+   
+   - Create an app on the Spotify Developer Dashboard and get your ```Client ID``` and ```Client Secret```.
 
-Create an app on the Spotify Developer Dashboard and get your Client ID and Client Secret.
+   - Obtain an API key from Music.AI.
 
-Obtain an API key from Music.AI.
+   Then, create a ```.env``` file at the root of the project and add the following credentials:
 
-Then, create a .env file at the root of the project and add the following credentials:
+   ```env
+   SPOTIFY_CLIENT_ID=<your-client-id>
+   SPOTIFY_CLIENT_SECRET=<your-client-secret>
+   SPOTIFY_REDIRECT_URI=<your-redirect-uri>
+   MUSIC_AI_API_KEY=<your-music-ai-api-key>
 
-env
-Copiar
-SPOTIFY_CLIENT_ID=<your-client-id>
-SPOTIFY_CLIENT_SECRET=<your-client-secret>
-SPOTIFY_REDIRECT_URI=<your-redirect-uri>
-MUSIC_AI_API_KEY=<your-music-ai-api-key>
-Running the Application
+## Running the Application
 To start the development server, run the following command:
 
-bash
-Copiar
-npm run dev
-# or
-yarn dev
+1. **Starting Development Server**
+   ```bash
+   npm run dev
 This will launch the server at http://localhost:3000.
 
-How to Use
-Spotify Authentication:
+## How to Use
+1. **Spotify Authentication:**
 
 Visit http://localhost:3000/auth/spotify to authenticate with Spotify. You will be redirected to the Spotify login page, where you can authorize the app.
 
-Access Your Playlists:
+2. **Access Your Playlists:**
 
 Once authenticated, you will be able to view your Spotify playlists and select a song to process.
 
-Process the Song:
+3. **Process the Song:**
 
 After selecting a song, the system will send it to Music.AI for processing. Music.AI will break the song down into separate tracks based on the different instruments used.
-
-Contributing
-Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-This version keeps the same structure, but it's reworded for clarity and better readability. Let me know if you need further adjustments!
