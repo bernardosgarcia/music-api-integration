@@ -1,21 +1,26 @@
 import express from 'express';
 import dotenv from 'dotenv';
-
-// Carregar variáveis de ambiente do arquivo .env
+import { authSpotify } from './middlewares/authSpotify';
+import authRoutes from './routes/auth';
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware para parsear o JSON
 app.use(express.json());
 
-// Rota inicial
-app.get('/', (req, res) => {
-  res.send('Servidor Express com TypeScript está funcionando!');
+app.use(authSpotify);
+
+app.use('/api', authRoutes);
+
+app.get('/api/', (req, res) => {
+  const userId = req.user?.id;
+  res.json({
+    message: 'Server is running!',
+    userId: userId || 'Unauthorized User'
+  }); 
 });
 
-// Iniciar o servidor
 app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
