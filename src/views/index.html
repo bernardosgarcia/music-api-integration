@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Fazer login com Spotify</h1>
+    <button onclick="window.location.href='/api/auth/login'">Login com Spotify</button>
+    <!-- <pre id="result"></pre> -->
+
+    <!-- <script>
+        document.getElementById("login").addEventListener("click", function() {
+          fetch('/api/auth/login')
+            .then(response => {
+                console.log(response)
+              if (!response.ok) {
+                throw new Error("Erro na requisição");
+              }
+              return response.json();
+            })
+            .then(data => {
+                console.log('API Response: ', data)
+              document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+              console.error("Erro:", error);
+            });
+        });
+      </script> -->
+</body>
+</html>

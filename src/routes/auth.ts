@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { getAuth } from '../controllers/authController';
+import { loginWithSpotify, callbackSpotify } from '../controllers/authController';
 
 const router = Router();
 
-router.get('/auth', getAuth);
+router.get('/auth/login', loginWithSpotify);
+router.get('/auth/callback', callbackSpotify)
 
 export default router;
