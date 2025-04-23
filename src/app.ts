@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
+<<<<<<< HEAD:src/index.ts
 app.use(cors({
   origin: 'http://127.0.0.1:3000',
   credentials: true
@@ -18,6 +19,8 @@ app.use(cors({
 
 app.set('views', path.join(__dirname, 'views'));
 
+=======
+>>>>>>> origin/main:src/app.ts
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'));
 });
