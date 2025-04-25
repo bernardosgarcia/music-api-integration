@@ -1,5 +1,11 @@
 import { Request, Response } from 'express';
 
-export const addSong = async (req: Request, res: Response) => {
+export class SongController {
 
-};
+    async getSongStatus(req: Request, res: Response) {
+        res.json({status: 'ok'});
+    }
+}
+
+export const songController = new SongController();
+

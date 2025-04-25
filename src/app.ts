@@ -1,8 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import authRoutes from './routes/auth';
 import path from 'path';
 import cors from 'cors';
+import authRouter from './routes/authRoute';
+import songRouter from './routes/songRoute';
 
 dotenv.config();
 
@@ -22,7 +23,8 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
-app.use('/api', authRoutes);
+app.use('/api/auth', authRouter);
+app.use('/api/songs', songRouter);
 
 app.get('/api/', (req, res) => {
   const userId = req.user?.id;
