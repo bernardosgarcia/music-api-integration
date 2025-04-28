@@ -33,7 +33,7 @@ export class AuthController {
     const internalAccessToken = authService.getInternalToken();
     const authResponse = new AuthResponse(spotifyAccessToken, internalAccessToken);
 
-    res.json(authResponse);
+    res.redirect(env.CLIENT_URI + '/#' + querystring.stringify(authResponse))
   };
 
 }
