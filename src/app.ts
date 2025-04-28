@@ -4,6 +4,7 @@ import path from 'path';
 import cors from 'cors';
 import authRouter from './routes/authRoute';
 import songRouter from './routes/songRoute';
+import { redisConnect } from './config/redisConnect';
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
+redisConnect();
 
 app.use(cors({
   origin: ['http://127.0.0.1:3000', 'https://synkro-music.vercel.app'],

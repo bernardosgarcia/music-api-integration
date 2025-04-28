@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { env } from '../config/env';
+import { TokenInfo } from '../dtos/authResponse';
 import jwt from 'jsonwebtoken';
 var querystring = require('querystring');
 
@@ -26,7 +27,7 @@ export class AuthService {
               }
             );
 
-            return response.data.access_token;
+            return new TokenInfo(response.data.access_token, response.data.expires_in, response.data.refresh_token);
         } catch(error) {
             console.error('Failed to obtain Spotify token:', error);
             throw new Error('Failed to generate Spotify token');
@@ -35,14 +36,17 @@ export class AuthService {
 
     getInternalToken() {
         try {
+            const expireIn = Math.floor(Date.now() / 1000) + (60 * 60);
+
             const payload = {
                 iss: 'music-api-integration',
                 iat: Math.floor(Date.now() / 1000),
-                exp: Math.floor(Date.now() / 1000) + (60 * 60), // Token expires in 1 hour
+                exp: expireIn, // Token expires in 1 hour
             };
 
             const token = jwt.sign(payload, env.INTERNAL_JWT_SECRET);
-            return token;
+
+            return new TokenInfo(token, expireIn);
         } catch (error) {
             console.error('Error generating internal token:', error);
             throw new Error('Failed to generate internal token');

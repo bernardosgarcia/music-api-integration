@@ -6,5 +6,7 @@ export const env = {
     SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET || '',
     SPOTIFY_SCOPE: process.env.SPOTIFY_SCOPE || '',
     SPOTIFY_REDIRECT_URI: process.env.SPOTIFY_REDIRECT_URI || '',
-    CLIENT_URI: process.env.CLIENT_URI || 'http://127.0.0.1:3000'
+    CLIENT_URI: process.env.CLIENT_URI || 'http://127.0.0.1:3000',
+    REDIS_URL: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
+    REDIS_PASSWORD: process.env.REDIS_PASSWORD || '',
 };

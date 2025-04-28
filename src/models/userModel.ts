@@ -1,9 +1,11 @@
 import { UUID } from "crypto";
 
-export interface UserModel {
+interface UserModel {
     user?: {
         id: UUID;
         displayName: string;
         email?: string;
     }
 }
+
+export default UserModel;

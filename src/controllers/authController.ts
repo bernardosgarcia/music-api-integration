@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import { generateRandomString } from '../utils/randomString';
+import generateRandomString from '../utils/randomString';
 import { env } from '../config/env';
 import { authService } from '../services/authService';
+import cacheService from '../services/cacheService';
 import { AuthResponse } from '../dtos/authResponse';
 var querystring = require('querystring');
 
 export class AuthController {
-
   loginWithSpotify(req: Request, res: Response)
   {
     var state = generateRandomString(16);
@@ -29,13 +29,26 @@ export class AuthController {
       return res.redirect('/#' + querystring.stringify({ error: 'state_mismatch' }));
     }
   
-    const spotifyAccessToken = await authService.getSpotifyTokenByCode(code as string);
-    const internalAccessToken = authService.getInternalToken();
-    const authResponse = new AuthResponse(spotifyAccessToken, internalAccessToken);
+    const spotifyTokenInfo = await authService.getSpotifyTokenByCode(code as string);
+    const internalTokenInfo = authService.getInternalToken();
 
-    res.redirect(env.CLIENT_URI + '/#' + querystring.stringify(authResponse))
+    await cacheService.set('spotify-token', spotifyTokenInfo);
+    await cacheService.set('internal-token', internalTokenInfo);
+    
+    res.redirect(env.CLIENT_URI);
   };
 
+  async getTokenByCache(req: Request, res: Response) {
+    const spotifyTokenInfo = await cacheService.get('spotify-token');
+    const internalTokenInfo = await cacheService.get('internal-token');
+
+    const authResponse: AuthResponse = {
+      spotifyTokenInfo: spotifyTokenInfo,
+      internalTokenInfo: internalTokenInfo
+    };
+
+    res.json(authResponse);
+  }
 }
 
 export const authController = new AuthController();
