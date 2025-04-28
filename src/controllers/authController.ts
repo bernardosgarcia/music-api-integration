@@ -16,7 +16,7 @@ export class AuthController {
       querystring.stringify({
         response_type: 'code',
         client_id: env.SPOTIFY_CLIENT_ID,
-        scope: 'user-read-private user-read-email',
+        scope: env.SPOTIFY_SCOPE,
         redirect_uri: env.SPOTIFY_REDIRECT_URI,
         state: state
       }));
