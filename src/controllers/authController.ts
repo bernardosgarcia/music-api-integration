@@ -37,7 +37,7 @@ export class AuthController {
     await cacheService.set('spotify-token-' + sessionId, spotifyTokenInfo);
     await cacheService.set('internal-token-' + sessionId, internalTokenInfo);
   
-    res.redirect(env.CLIENT_URI);
+    res.redirect(env.CLIENT_URI + '/?sessionId=' + sessionId);
   };
 
   async getTokenByCache(req: Request, res: Response) {
