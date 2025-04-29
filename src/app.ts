@@ -5,6 +5,7 @@ import cors from 'cors';
 import authRouter from './routes/authRoute';
 import songRouter from './routes/songRoute';
 import { redisConnect } from './config/redisConnect';
+import setupSwagger from './config/swagger';
 
 dotenv.config();
 
@@ -36,6 +37,8 @@ app.get('/api/', (req, res) => {
     userId: userId || 'Unauthorized User'
   }); 
 });
+
+setupSwagger(app);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -32,15 +32,23 @@ export class AuthController {
     const spotifyTokenInfo = await authService.getSpotifyTokenByCode(code as string);
     const internalTokenInfo = authService.getInternalToken();
 
-    await cacheService.set('spotify-token', spotifyTokenInfo);
-    await cacheService.set('internal-token', internalTokenInfo);
-    
+    const sessionId = generateRandomString(16);
+
+    await cacheService.set('spotify-token-' + sessionId, spotifyTokenInfo);
+    await cacheService.set('internal-token-' + sessionId, internalTokenInfo);
+  
     res.redirect(env.CLIENT_URI);
   };
 
   async getTokenByCache(req: Request, res: Response) {
-    const spotifyTokenInfo = await cacheService.get('spotify-token');
-    const internalTokenInfo = await cacheService.get('internal-token');
+    const sessionId = req.query.sessionId as string;
+
+    if (!sessionId) {
+      return res.status(400).json({ error: 'Missing sessionId' });
+    }
+
+    const spotifyTokenInfo = await cacheService.get('spotify-token-' + sessionId);
+    const internalTokenInfo = await cacheService.get('internal-token-' + sessionId);
 
     const authResponse: AuthResponse = {
       spotifyTokenInfo: spotifyTokenInfo,
