@@ -9,6 +9,11 @@ const options: swaggerJSDoc.Options = {
       title: 'API Documentação',
       version: '1.0.0',
     },
+    servers: [
+      {
+        url: 'https://music-api-integration.onrender.com',
+      },
+    ],
   },
   apis: ['./src/routes/*.ts'],
 };
