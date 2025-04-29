@@ -9,8 +9,8 @@ const router = Router();
  *   get:
  *     summary: Realizar login com Spotify
  *     responses:
- *       200:
- *         description: Sucesso
+ *       204:
+ *         description: Success no content
  */
 router.get('/login', authController.loginWithSpotify);
 router.get('/callback', authController.callbackSpotify);
@@ -27,8 +27,8 @@ router.get('/callback', authController.callbackSpotify);
  *           type: string
  *         required: true
  *     responses:
- *       204:
- *         description: Success no content
+ *       200:
+ *         description: Success
  *       400:
  *         description: Mising sessionId
  */
