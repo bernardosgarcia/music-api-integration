@@ -15,13 +15,14 @@ const options: swaggerJSDoc.Options = {
       },
     ],
   },
-  apis: ['./src/routes/*.ts'],
+  apis: ['./src/routes/*.ts', './dist/routes/*.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
 
 const setupSwagger = (app: Express) => {
-  console.log('Iniciando Swagger...', swaggerSpec);
+  console.log('Swagger Options:', options);
+  console.log('Swagger Spec:', swaggerSpec);
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };
 
