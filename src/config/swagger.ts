@@ -16,7 +16,7 @@ const options: swaggerJSDoc.Options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 const setupSwagger = (app: Express) => {
-  console.log('Iniciando Swagger...');
+  console.log('Iniciando Swagger...', swaggerSpec);
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };
 
