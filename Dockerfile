@@ -1,4 +1,4 @@
-FROM node:18-alpine AS builder
+FROM node:20 AS builder
 
 WORKDIR /app
 
@@ -10,7 +10,9 @@ COPY src ./src
 
 RUN npm run build
 
-FROM node:18-alpine
+COPY src/views ./dist/views
+
+FROM node:20
 
 WORKDIR /app
 
