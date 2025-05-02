@@ -1,11 +1,5 @@
-import express from "express";
-import posts from "./postRoutes.js";
-import authors from "./authorRoutes.js";
+import { Router } from 'express';
 
-const routes = (app) => {
-    app.route("/").get((req, res) => res.status(200).send("Node.js com Express"));
+const router = Router();
 
-    app.use(express.json(), posts, authors);
-};
-
-export default routes;
+export default router;
