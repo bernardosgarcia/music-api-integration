@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import generateRandomString from '../utils/randomString';
-import { env } from '../config/env';
+import env from '../config/env';
 import { authService } from '../services/authService';
 import cacheService from '../services/cacheService';
 import { AuthResponse } from '../dtos/authResponse';

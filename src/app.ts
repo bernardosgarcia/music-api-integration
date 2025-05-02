@@ -6,6 +6,7 @@ import authRouter from './routes/authRoute';
 import songRouter from './routes/songRoute';
 import { redisConnect } from './config/redisConnect';
 import setupSwagger from './config/swagger';
+import { exceptionMiddleware } from './middleware/exceptionMiddleware';
 
 dotenv.config();
 
@@ -37,6 +38,8 @@ app.get('/api/', (req, res) => {
     userId: userId || 'Unauthorized User'
   }); 
 });
+
+app.use(exceptionMiddleware);
 
 setupSwagger(app);
 

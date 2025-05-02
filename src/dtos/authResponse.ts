@@ -11,11 +11,11 @@ export class AuthResponse {
 export class TokenInfo {
     accessToken: string;
     refreshToken?: string;
-    expiresIn: number;
+    expiresAt: number;
 
-    constructor(accessToken: string, expiresIn: number, refreshToken?: string) {
+    constructor(accessToken: string, expiresAt: number, refreshToken?: string) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
-        this.expiresIn = expiresIn;
+        this.expiresAt = expiresAt;
     }
 }
