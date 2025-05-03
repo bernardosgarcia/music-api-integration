@@ -1,3 +1,4 @@
+import { ok } from "assert"
 import { downloadService } from "../services/downloadService"
 
 export class downloadController {
@@ -10,7 +11,7 @@ export class downloadController {
         const url = await downloadService.searchMusic(await music)
         console.log(url)
 
-        const shortUrl = await downloadService.accessPage(url) ?? ""
+        //const shortUrl = await downloadService.accessPage(url) ?? ""
         
         const download = await downloadService.downloadMusic(url, "C:\\Users\\Muril_vbeysh7\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe")
 
@@ -33,13 +34,13 @@ export class downloadController {
 
         // const shortUrl = await downloadService.accessPage(url) ?? ""
         
-        // const download = await downloadService.downloadMusic(url, "C:\\Users\\Muril_vbeysh7\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe")
+        const download = await downloadService.downloadPlaylist(url, "C:\\Users\\Muril_vbeysh7\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe")
 
         // console.log(download)
 
         const time = Date.now() - init
         console.log (time)
 
-        return playlist
+        return ok
     }
 }

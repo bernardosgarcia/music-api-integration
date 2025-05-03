@@ -1,8 +1,8 @@
-import { Console } from "console";
 import path = require("path");
 import puppeteer = require("puppeteer")
-const ytd = require("yt-search")
+import { ok } from "assert";
 const { spawn } = require('child_process');
+const ytd = require("yt-search")
 
 export class downloadService {
 
@@ -148,47 +148,40 @@ export class downloadService {
         }
     }
 
-    
-
-
-
-    static async downloadPlaylist (url : String, loc_ffmpeg?: String){
+    static async downloadPlaylist (url : Array<String>, loc_ffmpeg?: String){
         loc_ffmpeg = loc_ffmpeg || "C:\\Users\\Muril_vbeysh7\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe"
         url = url || "https://youtube.com/watch?v=n5wxZ_OBUXk"
         const outputPath = path.join(__dirname, '../assets/songs/input_files/%(title)s.%(ext)s');
 
-        try {
+        await Promise.allSettled((url.map(async (element) => {
             const download = await spawn('yt-dlp', [
                 '--ffmpeg-location', loc_ffmpeg,
                 '-f', 'bestaudio',
                 '--extract-audio',
                 '--audio-format', 'mp3',
                 '-o', outputPath,
-                url
+                element
               ]);
+            //   download.stdout.on('data', (data : any ) => {
+            //       console.error(`Resultado no Python: ${data.toString()}`)
+            //   })
+      
+            //   download.stderr.on('data', (data : any ) => {
+            //       console.error(`Error no Python: ${data.toString()}`)
+            //   })
+      
+            //   download.on('close', (code : any ) => {
+            //       if (code !== 0) {
+            //           console.error(`Processo Python finalizado com código de erro: ${code}`);
+            //         } else {
+            //           console.log('Processo Python concluído com sucesso');
+            //         }
+            //   })
+        })))
 
-        download.stdout.on('data', (data : any ) => {
-            console.error(`Resultado no Python: ${data.toString()}`)
-        })
-
-        download.stderr.on('data', (data : any ) => {
-            console.error(`Error no Python: ${data.toString()}`)
-        })
-
-        download.on('close', (code : any ) => {
-            if (code !== 0) {
-                console.error(`Processo Python finalizado com código de erro: ${code}`);
-              } else {
-                console.log('Processo Python concluído com sucesso');
-              }
-        })
-
-    } catch (err){
-        return console.error(err);
-        
-    }
+        return ok("download conclued")
     }
 }
 
 // Necessario ter o python / yt-dlp / ffmpeg -- instalar no Doccker
-// ffmpeg precisa ter o caminho dele ali em cima
+// ffmpeg precisa ter o caminho dele ali em cima / Pode ser passado pelo controller
