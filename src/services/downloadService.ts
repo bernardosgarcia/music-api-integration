@@ -12,4 +12,12 @@ export class downloadService {
         console.log(search)
         return search
     }
+
+    static async searchMusic ( music : string )  {
+        const resultado = await ytd(music);
+        const video = resultado.videos[0];
+        return video.url;
+    }
+
+
 }

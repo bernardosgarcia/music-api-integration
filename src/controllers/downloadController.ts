@@ -6,6 +6,13 @@ export class downloadController {
         const init = Date.now()
         
         const music = downloadService.getPlaylist(data)
+        
+        const url = await downloadService.searchMusic(await music)
+        console.log(url)
+
+
+        const time = Date.now() - init
+        console.log (time)
 
         return music
     }
