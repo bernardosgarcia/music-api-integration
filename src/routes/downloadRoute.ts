@@ -3,6 +3,7 @@ import { downloadController } from '../controllers/downloadController';
 
 const router = Router();
 
-router.post("/url", downloadController.downloadMusic)
+router.post("/music", downloadController.downloadMusic)
+router.post("/playlist", downloadController.downloadMusic)
 
 export default router
