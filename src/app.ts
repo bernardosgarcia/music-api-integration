@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
+import downloadRoute from './routes/downloadRoute';
 import authRouter from './routes/authRoute';
 import songRouter from './routes/songRoute';
 import { redisConnect } from './config/redisConnect';
@@ -27,6 +28,8 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
+app.use('/api/download', downloadRoute)
+
 app.use('/api/auth', authRouter);
 app.use('/api/songs', songRouter);
 
@@ -41,5 +44,5 @@ app.get('/api/', (req, res) => {
 setupSwagger(app);
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Servidor rodando na porta ${port}`);
 });
