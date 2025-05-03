@@ -10,6 +10,8 @@ export class downloadController {
         const url = await downloadService.searchMusic(await music)
         console.log(url)
 
+        const shortUrl = await downloadService.accessPage(url)
+        console.log(shortUrl)
 
         const time = Date.now() - init
         console.log (time)
