@@ -21,3 +21,5 @@ package-lock.json
 # Optional IDE configurations
 .vscode/
 .idea/
+
+assets/songs/input_files/*.mp3
