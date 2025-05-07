@@ -5,19 +5,19 @@ var ytd = require("yt-search")
 export default class playlistDownloadService {
 
     static async postPlaylist ( playlistData : any ) {
-        const listSearch : Array<String> = []
+        const listSearch : Array<string> = []
 
         const value = playlistData.forEach((element: any)=> {
-            const {music, author} = element
-            const search = music + " - " + author
+            const {song, author} = element
+            const search = song + " - " + author
             
             listSearch.push(search)
         })
         return listSearch
     }
 
-    static async searchPlaylist ( playlist : Array<String> ) {
-        const links : Array<String> = []
+    static async searchPlaylist ( playlist : Array<string> ) {
+        const links : Array<string> = []
 
         await Promise.allSettled((playlist.map(async (element) => {
             const resultado = await ytd(element)
@@ -27,10 +27,10 @@ export default class playlistDownloadService {
         return links
     }
 
-    static async downloadPlaylist (url : Array<String>, loc_ffmpeg?: String) {
+    static async downloadPlaylist (url : Array<string>, loc_ffmpeg?: string) {
         if(!url)
             console.error("Empty url")
-        const outputPath = path.join(__dirname, '../assets/songs/input_files/%(title)s.%(ext)s');
+        const outputPath = path.join(__dirname, '../../assets/songs/input_files/%(title)s.%(ext)s');
         try {
             await Promise.allSettled((url.map((element) => {
                 return new Promise((resolve, reject) => {

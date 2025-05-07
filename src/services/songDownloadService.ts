@@ -19,7 +19,7 @@ export default class songDownloadService {
         return video.url
     }
 
-    static async downloadSong (url : String, loc_ffmpeg?: String){
+    static async downloadSong (url : string, loc_ffmpeg?: string){
         if(!url)
             console.error("Empty url")
         const outputPath = path.join(__dirname, '../assets/songs/input_files/%(title)s.%(ext)s');
@@ -33,8 +33,8 @@ export default class songDownloadService {
                 '-o', outputPath,
                 url
                 ])
-            //download.stdout.on('data', (data: any) => {console.log(`stdout: ${data}`) })
-            //download.stderr.on('data', (data: any) => {console.error(`stderr: ${data}`)})
+            download.stdout.on('data', (data: any) => {console.log(`stdout: ${data}`) })
+            download.stderr.on('data', (data: any) => {console.error(`stderr: ${data}`)})
             download.on('close', (code: any) => { resolve(code)})
             download.on('error', (err: any) => {console.error('Error Download:', err); reject(err)})
         })
