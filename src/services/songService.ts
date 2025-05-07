@@ -1,7 +1,7 @@
-// import { env } from '../config/env';
+import { env } from '../config/env';
 
-// export class SongService {
+export class SongService {
 
-// }
+}
 
-// export const songService = new SongService();
+export const songService = new SongService();
