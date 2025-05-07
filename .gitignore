@@ -22,4 +22,4 @@ package-lock.json
 .vscode/
 .idea/
 
-.assets/songs/input_files/
+assets/songs/input_files/*.mp3
