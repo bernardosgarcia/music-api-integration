@@ -77,3 +77,27 @@ Once authenticated, you will be able to view your Spotify playlists and select a
 3. **Process the Song:**
 
 After selecting a song, the system will send it to Music.AI for processing. Music.AI will break the song down into separate tracks based on the different instruments used.
+
+/////////////////////////////////////////////////////
+
+1. **Using Download Song or Playlist:**
+
+Use that structure in your body request for download your song:
+{   
+  "song" : "Name_Song",
+  "author" : "Name_Author"
+}
+and http://127.0.0.1:3000/api/download/song POST.
+
+now, use that structure in your body request for download playlist
+[
+  {   
+   "song" : "Name_Song",
+   "author" : "Name_Author"
+  },
+  {   
+   "song" : "Name_Song2",
+   "author" : "Name_Author2"
+  }
+]
+and http://127.0.0.1:3000/api/download/playlist POST. 
