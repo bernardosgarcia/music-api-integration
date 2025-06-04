@@ -1,6 +1,7 @@
 import 'dotenv/config';
 
 export const env = {
+    MUSIC_AI_API_KEY: process.env.MUSIC_AI_API_KEY || '',
     INTERNAL_JWT_SECRET: process.env.INTERNAL_JWT_SECRET || '',
     SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID || '',
     SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET || '',
