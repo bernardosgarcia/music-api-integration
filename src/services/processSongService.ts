@@ -1,5 +1,5 @@
 import Moises from "moises/sdk"
-import env from "../config/env"
+import { env } from "../config/env"
 import constants from "../config/constants"
 import { hasFilesWithExtension } from "../utils/directoryScanner"
 
