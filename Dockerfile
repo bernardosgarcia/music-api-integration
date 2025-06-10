@@ -14,6 +14,8 @@ COPY src/views ./dist/views
 
 FROM node:20
 
+RUN apt-get update && apt-get install -y ffmpeg
+
 WORKDIR /app
 
 COPY package*.json ./

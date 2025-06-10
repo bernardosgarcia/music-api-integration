@@ -19,6 +19,7 @@ export default class songDownloadService {
         return video.url
     }
 
+    //Depreceated
     static async downloadSong (url : string, loc_ffmpeg?: string){
         if(!url)
             console.error("Empty url")
