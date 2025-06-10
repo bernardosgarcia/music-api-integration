@@ -11,6 +11,9 @@ node_modules/
 # .env file
 .env
 
+# Google Cloud Credentials JSON
+gcloud-credentials.json
+
 # OS specific files
 .DS_Store
 Thumbs.db

@@ -4,6 +4,7 @@ import playlistDownloadService from "../services/playlistDownloadService"
 import { Song } from '../types/song';
 
 export class downloadController {
+    //Depreceated
     static async downloadSong(req: Request, res: Response) {
         try{
             const dataSong : Song = req.body
@@ -30,7 +31,7 @@ export class downloadController {
             const playlist = await playlistDownloadService.postPlaylist(dataPlaylist)
             const url = await playlistDownloadService.searchPlaylist(playlist)
             // const shortUrl = await playlistDownloadService.accessPage(url) ?? ""
-            await playlistDownloadService.downloadPlaylist(url, "C:\\Users\\Muril_vbeysh7\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe")
+            await playlistDownloadService.downloadPlaylist(url)
             return res.status(200).json({message : "Succes download playlist"})
         } catch (err) {
             return res.status(500).json({message : "Error download playlist"})

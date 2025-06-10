@@ -1,6 +1,8 @@
 import path = require("path");
 var { spawn } = require('child_process');
 var ytd = require("yt-search")
+var fs = require('fs');
+import { env } from '../config/env';
 
 export default class playlistDownloadService {
 
@@ -27,15 +29,29 @@ export default class playlistDownloadService {
         return links
     }
 
-    static async downloadPlaylist (url : Array<string>, loc_ffmpeg?: string) {
+    static async downloadPlaylist (url : Array<string>) {
         if(!url)
             console.error("Empty url")
-        const outputPath = path.join(__dirname, '../../assets/songs/input_files/%(title)s.%(ext)s');
+
+        const ffmpegPath = env.FFMPEG_PATH;
+
+        if (!ffmpegPath) {
+            console.error('ffmpeg path is not specified.');
+            return;
+        }
+
+        const outputPath = path.join(__dirname, 'output', '%(title)s.%(ext)s');
+        const outputDir = path.dirname(outputPath);
+
+        if (!fs.existsSync(outputDir)) {
+            fs.mkdirSync(outputDir, { recursive: true });
+        }
+        
         try {
             await Promise.allSettled((url.map((element) => {
                 return new Promise((resolve, reject) => {
                     const download = spawn('yt-dlp', [
-                        '--ffmpeg-location', loc_ffmpeg,
+                        '--ffmpeg-location', ffmpegPath,
                         '-f', 'bestaudio',
                         '--extract-audio',
                         '--audio-format', 'mp3',
