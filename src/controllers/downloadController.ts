@@ -32,7 +32,7 @@ export class downloadController {
             const url = await playlistDownloadService.searchPlaylist(playlist)
             // const shortUrl = await playlistDownloadService.accessPage(url) ?? ""
             await playlistDownloadService.downloadPlaylist(url)
-            return res.status(200).json({message : "Succes download playlist"})
+            return res.status(200).json({message : "Success download playlist"})
         } catch (err) {
             return res.status(500).json({message : "Error download playlist"})
         }

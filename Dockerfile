@@ -14,7 +14,15 @@ COPY src/views ./dist/views
 
 FROM node:20
 
-RUN apt-get update && apt-get install -y ffmpeg
+RUN apt-get update && apt-get install -y \
+    wget \
+    python3 \
+    python3-pip \
+    python3-venv
+
+RUN python3 -m venv /env
+RUN /env/bin/pip install --upgrade pip
+RUN /env/bin/pip install yt-dlp
 
 WORKDIR /app
 
