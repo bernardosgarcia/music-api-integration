@@ -1,6 +1,10 @@
 version: '3.8'
 
 services:
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
   app:
     build: .
     depends_on:
@@ -15,8 +19,3 @@ services:
       - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
       - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
       - SPOTIFY_REDIRECT_URI=${SPOTIFY_REDIRECT_URI}
-  
-  redis:
-    image: "redis:latest"
-    ports:
-      - "6379:6379"

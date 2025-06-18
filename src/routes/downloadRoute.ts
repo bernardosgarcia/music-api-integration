@@ -44,6 +44,8 @@ router.post("/song", downloadController.downloadSong)
  *             items:
  *               type: object
  *               properties:
+ *                 id:
+ *                   type: string
  *                 song:
  *                   type: string
  *                 author:
