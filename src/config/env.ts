@@ -9,6 +9,6 @@ export const env = {
     SPOTIFY_REDIRECT_URI: process.env.SPOTIFY_REDIRECT_URI || '',
     FFMPEG_PATH: process.env.FFMPEG_PATH || '/usr/bin/ffmpeg',
     CLIENT_URI: process.env.CLIENT_URI || 'http://127.0.0.1:3000',
-    REDIS_URL: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
+    REDIS_URL: process.env.REDIS_URL || 'redis://redis:6379',
     REDIS_PASSWORD: process.env.REDIS_PASSWORD || '',
 };

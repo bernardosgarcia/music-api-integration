@@ -1,6 +1,8 @@
 import {Request, Response} from 'express';
 import songDownloadService  from "../services/songDownloadService"
 import playlistDownloadService from "../services/playlistDownloadService"
+import { deleteAllFoldersAndFiles } from "../utils/deleteFolders"
+import { processSongService } from '../services/processSongService';
 import { Song } from '../types/song';
 
 export class downloadController {
@@ -23,18 +25,45 @@ export class downloadController {
     }
 
     static async downloadPlaylist(req: Request, res: Response) {
+        console.log("Downloading playlist")
         try{
-            const dataPlaylist = req.body   
+            interface Input {
+                id: string;
+                song: string;
+                author: string;
+            }
+
+            const dataPlaylist: Input[] = req.body
+            console.log(dataPlaylist)
             if (!dataPlaylist)
                 return res.status(400).json({ message : "The request body data is empty."}) 
-    
-            const playlist = await playlistDownloadService.postPlaylist(dataPlaylist)
-            const url = await playlistDownloadService.searchPlaylist(playlist)
-            // const shortUrl = await playlistDownloadService.accessPage(url) ?? ""
-            await playlistDownloadService.downloadPlaylist(url)
-            return res.status(200).json({message : "Succes download playlist"})
+
+            interface Output {
+                id: string;
+                instrument: string;
+                vocal: string;
+            }
+
+            var array_response: Output[] = [];
+
+            for(const element of dataPlaylist) {
+                console.log(element)
+                const song = await playlistDownloadService.postPlaylist(element)
+                const urlSong = await playlistDownloadService.searchPlaylist(song)
+                console.log(urlSong)
+                await playlistDownloadService.downloadPlaylist(urlSong)
+
+                await processSongService.processSongsFolder()
+
+                const response = await playlistDownloadService.uploadMp3ToGCS(element.id)
+                array_response.push(response)
+
+                deleteAllFoldersAndFiles();                
+            }
+            
+            return res.status(200).json(array_response)
         } catch (err) {
-            return res.status(500).json({message : "Error download playlist"})
+            return res.status(500).json({message : "Error download playlist", err: `${err}`})
         }
     }
 }
